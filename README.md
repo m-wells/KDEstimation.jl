@@ -1,4 +1,5 @@
 # KDEstimation (Kernel Density Estimation)
+[![Build Status](https://travis-ci.com/m-wells/KDEstimation.jl.svg?branch=master)](https://travis-ci.com/m-wells/KDEstimation.jl)
 
 The purpose of this package is to provide a general framework for implementing Kernel Density Estimation methods.
 
