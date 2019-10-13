@@ -98,7 +98,7 @@ include("./univariate/bandwidth_selectors/lscv.jl")
 
 
 # Default to FFT method
-@inline kde(K::Kernel{UnScaled,D}, h::Real, X::AbstractVector, EM=FFT()) where {D<:Distribution} = kde(Scale(K,h), X, EM)
+@inline kde(K::Kernel{UnScaled,D}, h::Real, X::AbstractVector, EM=FFT()) where {D<:Distribution} = kde(Kernel(D,h), X, EM)
 @inline kde(::Type{D}, h::Real, X::AbstractVector, EM=FFT()) where {D<:Distribution} = kde(Kernel(D,h), X, EM)
 @inline lscv(::Type{D}, h::Real, X::AbstractVector, EM=FFT()) where {D<:Distribution} = lscv(Kernel(D, h), X, EM)
 
