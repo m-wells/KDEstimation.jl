@@ -1,0 +1,25 @@
+name: CompatHelper
+
+on:
+  schedule:
+    - cron: '00 00 * * *'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        julia-version: [1.6.0]
+        julia-arch: [x64]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    steps:
+      - uses: julia-actions/setup-julia@latest
+        with:
+          version: ${{ matrix.julia-version }}
+          arch: ${{ matrix.julia-arch }}
+      - name: Pkg.add("CompatHelper")
+        run: julia -e 'import Pkg; Pkg.add("CompatHelper")'
+      - name: CompatHelper.main()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: julia -e 'using CompatHelper; CompatHelper.main()'
