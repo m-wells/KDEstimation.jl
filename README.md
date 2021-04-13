@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/m-wells/KDEstimation.jl/branch/master/graph/badge.svg?branch=master)](https://codecov.io/gh/m-wells/KDEstimation.jl)
 [![Coverage Status](https://coveralls.io/repos/github/m-wells/KDEstimation.jl/badge.svg?branch=master)](https://coveralls.io/github/m-wells/KDEstimation.jl?branch=master)
 
-The purpose of this package is to provide a general framework for implementing Kernel Density Estimation methods.
+This package provides a general framework for implementing Kernel Density Estimation methods.
 
 ## Univariate KDE
 The density estimator
