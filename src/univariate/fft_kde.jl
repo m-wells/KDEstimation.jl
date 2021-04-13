@@ -1,7 +1,10 @@
-const FFTPlansDict = Dict{Int64,Tuple{rFFTWPlan{Float64,-1,false,1},
-                                      ScaledPlan{Complex{Float64},rFFTWPlan{Complex{Float64},1,false,1},Float64}
-                                     }
-                         }
+const FFTPlansDict = Dict{
+    Int64,
+    Tuple{
+        rFFTWPlan{Float64,-1,false,1},
+        ScaledPlan{Complex{Float64},rFFTWPlan{Complex{Float64},1,false,1,UnitRange{Int}},Float64}
+    }
+}
 
 global fftplans = FFTPlansDict()
 

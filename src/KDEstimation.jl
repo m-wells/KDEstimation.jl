@@ -11,7 +11,7 @@ using Optim
 using Optim: UnivariateOptimizationResults
 
 # the following line is needed for Tricube (or any other "custom" distribution)
-using Distributions: @check_args, NoArgCheck, @distr_support
+using Distributions: @check_args, @distr_support
 # can remove the above using line once distributions have been pulled into Distributions.jl
 
 export kde, Direct, Binned, FFT, rule_of_thumb1, rule_of_thumb2, lscv, minimizer, δ0, canonical_transform
