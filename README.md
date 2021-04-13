@@ -30,34 +30,41 @@ can be evaluated using one of three implemented methods.
 ## Kernels implemented
 Here is a link to the [relevant wikipedia article](https://en.wikipedia.org/wiki/Kernel_(statistics)#Kernel_functions_in_common_use)
 
-| Kernel           | $K(u)$                                                  | Support    |
-|------------------|---------------------------------------------------------|------------|
-|Biweight          | <img src="https://latex.codecogs.com/gif.latex?\tfrac{15}{16}\left(1-u^2\right)^2" />                      | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
-|Cosine            | <img src="https://latex.codecogs.com/gif.latex?\tfrac{\pi}{4}\cos\left(\tfrac{\pi}{2}u\right)" />          | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
-|Epanechnikov      | <img src="https://latex.codecogs.com/gif.latex?\tfrac{3}{4}(1-u^2)" />                                     | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
-|Logistic          | <img src="https://latex.codecogs.com/gif.latex?\frac{1}{e^u&plus;2&plus;e^{-u}}" />                        | unbounded                                                                             |
-|Normal            | <img src="https://latex.codecogs.com/gif.latex?\tfrac{1}{\sqrt{2\pi}}\exp\left(-\tfrac{1}{2}u^2\right)" /> | unbounded                                                                             |
-|SymTriangularDist | <img src="https://latex.codecogs.com/gif.latex?1-\lvert&space;u&space;\rvert" />                           | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
-|Triweight         | <img src="https://latex.codecogs.com/gif.latex?\tfrac{35}{32}(1-u^2)^3" />                                 | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
-|Uniform           | <img src="https://latex.codecogs.com/gif.latex?\tfrac{1}{2}" />                                            | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+| Kernel           | <img src="https://latex.codecogs.com/gif.latex?&space;\boldsymbol{K(u)}" />                                       | Support                                                                                                 |
+|------------------|----------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+|Biweight          | <img src="https://latex.codecogs.com/gif.latex?&space;\tfrac{15}{16}\left(1-u^2\right)^2" />                      | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+|Cosine            | <img src="https://latex.codecogs.com/gif.latex?&space;\tfrac{\pi}{4}\cos\left(\tfrac{\pi}{2}u\right)" />          | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+|Epanechnikov      | <img src="https://latex.codecogs.com/gif.latex?&space;\tfrac{3}{4}(1-u^2)" />                                     | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+|Logistic          | <img src="https://latex.codecogs.com/gif.latex?&space;\frac{1}{e^u&plus;2&plus;e^{-u}}" />                        | unbounded                                                                                               |
+|Normal            | <img src="https://latex.codecogs.com/gif.latex?&space;\tfrac{1}{\sqrt{2\pi}}\exp\left(-\tfrac{1}{2}u^2\right)" /> | unbounded                                                                                               |
+|SymTriangularDist | <img src="https://latex.codecogs.com/gif.latex?&space;-\lvert&space;u&space;\rvert" />                            | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+|Triweight         | <img src="https://latex.codecogs.com/gif.latex?&space;\tfrac{35}{32}(1-u^2)^3" />                                 | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+|Uniform           | <img src="https://latex.codecogs.com/gif.latex?&space;\tfrac{1}{2}" />                                            | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
 
 This package uses [Distributions.jl](https://github.com/JuliaStats/Distributions.jl) to suppy kernels such that
 
-<img src="https://latex.codecogs.com/gif.latex?K_h\left(x-x_i\right)=\text{pdf}(D(x_i,h),x))" />
+<img src="https://latex.codecogs.com/gif.latex?&space;K_h\left(x-x_i\right)=\text{pdf}(D(x_i,h),x))" />
 
-where <img src="https://latex.codecogs.com/svg.latex?\inline&space;K_h(u)=\tfrac{1}{h}K(\tfrac{u}{h}))" />  and <img src="https://latex.codecogs.com/svg.latex?\inline&space;D" />) is one of the kernels listed in the table above.
+where
 
-__Note:__ for the Uniform distribution, [Distributions.jl](https://github.com/JuliaStats/Distributions.jl) defines `(loc,scale) = (a, b-a))` where `a` and `b` are the bounds lower and upper bounds, respectively.
-This package accounts for this inconsistancy by evaluating the Uniform kernel as <img src="https://latex.codecogs.com/svg.latex?\inline&space;\text{pdf}(\text{Uniform}(x_i-\frac{h}{2},x_i+\frac{h}{2}),x)" />.
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;K_h(u)=\tfrac{1}{h}K(\tfrac{u}{h})" />
+
+and <img src="https://latex.codecogs.com/gif.latex?\inline&space;D" /> is one of the kernels listed in the table above.
+
+### Note about the Uniform distribution
+[Distributions.jl](https://github.com/JuliaStats/Distributions.jl) defines `(loc,scale) = (a, b - a))` where `a` and `b` are the bounds lower and upper bounds, respectively.
+This package accounts for this inconsistancy by evaluating the Uniform kernel as
+
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;\text{pdf}(\text{Uniform}(x_i-\frac{h}{2},x_i+\frac{h}{2}),x)" />.
 
 ## Bandwidth selection via Least Squares Cross Validation
 The objective function to minimize is given by
 
-<img src="https://latex.codecogs.com/svg.latex?LSCV(h)=\int\hat{f}^2_h(x)dx-2\frac{1}{n}\sum_i\hat{f}_{h,-i}(X_i))" />
+<img src="https://latex.codecogs.com/gif.latex?&space;LSCV(h)=\int\hat{f}^2_h(x)dx-\frac{2}{n}\sum_i\hat{f}_{h,-i}(X_i)" />
 
 where
 
-<img src="https://latex.codecogs.com/svg.latex?\hat{f}_{h,-i}(X_i)=\frac{1}{(n-1)h}\sum_{j\ne&space;i}K\left(\frac{X_i-X_j}{h}\right)" />
+<img src="https://latex.codecogs.com/gif.latex?&space;\hat{f}_{h,-i}(X_i)=\frac{1}{(n-1)h}\sum_{j\ne&space;i}K\left(\frac{X_i-X_j}{h}\right)" />
 
 This has also been implemented using `Direct`, `Binned`, and `FFT` methods.
 
