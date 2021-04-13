@@ -5,22 +5,18 @@ on:
     - cron: '00 00 * * *'
 
 jobs:
-  CompatHelper:
-    name: "Run CompatHelper.jl"
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         julia-version: [1.6.0]
+        julia-arch: [x64]
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
-      - uses: julia-actions/setup-julia@v1.6.0
-      - name: "Set up Julia"
-        uses: julia-actions/setup-julia@v1.6
+      - uses: julia-actions/setup-julia@latest
         with:
           version: ${{ matrix.julia-version }}
           arch: ${{ matrix.julia-arch }}
-      - run: julia -e 'println("Hello, World!")'
-        shell: bash
       - name: Pkg.add("CompatHelper")
         run: julia -e 'import Pkg; Pkg.add("CompatHelper")'
       - name: CompatHelper.main()
