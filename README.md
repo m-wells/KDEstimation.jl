@@ -76,15 +76,7 @@ println("rule of thumb: ", rot)
 lscv_res = lscv(Normal,x,FFT())
 ```
 
-    ┌ Info: Precompiling KDEstimation [c13e3d18-d57b-11e9-0f19-037e2db2dfef]
-    └ @ Base loading.jl:1317
-
-
     rule of thumb: 0.2676817928332638
-
-
-
-
 
     LSCV{Normal,FFT(4096),1}
     Results of Optimization Algorithm
@@ -96,25 +88,13 @@ lscv_res = lscv(Normal,x,FFT())
      * Convergence: max(|x - x_upper|, |x - x_lower|) <= 2*(1.5e-08*|x|+2.2e-16): true
      * Objective Function Calls: 35
 
-
-
 # Visualization using [`Plots.jl`](https://github.com/JuliaPlots/PlotDocs.jl)
-
 
 ```julia
 using Plots; pyplot()
 plot(lscv_res)
 ```
-
-
-
-
-    
 ![png](README_files/README_3_0.png)
-    
-
-
-
 
 ```julia
 h = minimizer(lscv_res)
@@ -126,24 +106,16 @@ frot = kde(Normal, rot, x, FFT())
 ;
 ```
 
-    fkde(0.3) = 0.37927382397190534
-    frot(-2) = 0.05601509471009895
-
-
+```
+fkde(0.3) = 0.37927382397190534
+frot(-2) = 0.05601509471009895
+```
 
 ```julia
 plot(fkde, label="LSCV", lw=2)
 plot!(frot, label="Rule of thumb", lw=2)
 ```
-
-
-
-
-    
 ![png](README_files/README_5_0.png)
-    
-
-
 
 # Further Reading
 This work has been heavily influenced by Artur Gramacki's book "Nonparametric Kernel Density Estimation and Its Computational Aspects" 
