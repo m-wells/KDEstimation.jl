@@ -22,7 +22,7 @@ can be evaluated using one of three implemented methods.
   * <img src="https://latex.codecogs.com/gif.latex?\inline&space;O(M^2)" /> where <img src="https://latex.codecogs.com/gif.latex?\inline&space;M" /> is the number of evaluation points
   * <img src="https://latex.codecogs.com/gif.latex?\inline&space;M=4096" /> by default
 * `FFT()`
-  * <img src="https://latex.codecogs.com/gif.latex?\inline&space;O(M\log M)" /> where <img src="https://latex.codecogs.com/gif.latex?\inline&space;M" /> is the number of evaluation points
+  * <img src="https://latex.codecogs.com/gif.latex?\inline&space;O(M\log&space;M)" /> where <img src="https://latex.codecogs.com/gif.latex?\inline&space;M" /> is the number of evaluation points
   * <img src="https://latex.codecogs.com/gif.latex?\inline&space;M=4096" /> by default
 
 ## Multivariate KDE (work in progress)
@@ -32,14 +32,14 @@ Here is a link to the [relevant wikipedia article](https://en.wikipedia.org/wiki
 
 | Kernel           | $K(u)$                                                  | Support    |
 |------------------|---------------------------------------------------------|------------|
-|Biweight          | <img src="https://latex.codecogs.com/gif.latex?\tfrac{15}{16}\left(1-u^2\right)^2" />                      | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert u\rvert \le 1" /> |
-|Cosine            | <img src="https://latex.codecogs.com/gif.latex?\tfrac{\pi}{4}\cos\left(\tfrac{\pi}{2}u\right)" />          | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert u\rvert \le 1" /> |
-|Epanechnikov      | <img src="https://latex.codecogs.com/gif.latex?\tfrac{3}{4}(1-u^2)" />                                     | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert u\rvert \le 1" /> |
+|Biweight          | <img src="https://latex.codecogs.com/gif.latex?\tfrac{15}{16}\left(1-u^2\right)^2" />                      | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+|Cosine            | <img src="https://latex.codecogs.com/gif.latex?\tfrac{\pi}{4}\cos\left(\tfrac{\pi}{2}u\right)" />          | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+|Epanechnikov      | <img src="https://latex.codecogs.com/gif.latex?\tfrac{3}{4}(1-u^2)" />                                     | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
 |Logistic          | <img src="https://latex.codecogs.com/gif.latex?\frac{1}{e^u&plus;2&plus;e^{-u}}" />                        | unbounded                                                                             |
 |Normal            | <img src="https://latex.codecogs.com/gif.latex?\tfrac{1}{\sqrt{2\pi}}\exp\left(-\tfrac{1}{2}u^2\right)" /> | unbounded                                                                             |
-|SymTriangularDist | <img src="https://latex.codecogs.com/gif.latex?1-\lvert&space;u&space;\rvert" />                           | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert u\rvert \le 1" /> |
-|Triweight         | <img src="https://latex.codecogs.com/gif.latex?\tfrac{35}{32}(1-u^2)^3" />                                 | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert u\rvert \le 1" /> |
-|Uniform           | <img src="https://latex.codecogs.com/gif.latex?\tfrac{1}{2}" />                                            | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert u\rvert \le 1" /> |
+|SymTriangularDist | <img src="https://latex.codecogs.com/gif.latex?1-\lvert&space;u&space;\rvert" />                           | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+|Triweight         | <img src="https://latex.codecogs.com/gif.latex?\tfrac{35}{32}(1-u^2)^3" />                                 | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
+|Uniform           | <img src="https://latex.codecogs.com/gif.latex?\tfrac{1}{2}" />                                            | <img src="https://latex.codecogs.com/gif.latex?\inline&space;\lvert&space;u\rvert&space;\le&space;1" /> |
 
 This package uses [Distributions.jl](https://github.com/JuliaStats/Distributions.jl) to suppy kernels such that
 
