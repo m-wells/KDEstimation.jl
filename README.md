@@ -57,7 +57,7 @@ The objective function to minimize is given by
 
 where
 
-<img src="https://latex.codecogs.com/svg.latex?\hat{f}_{h,-i}(X_i)=\frac{1}{(n-1)h}\sum_{j\ne i}K\left(\frac{X_i-X_j}{h}\right)" />
+<img src="https://latex.codecogs.com/svg.latex?\hat{f}_{h,-i}(X_i)=\frac{1}{(n-1)h}\sum_{j\ne&space;i}K\left(\frac{X_i-X_j}{h}\right)" />
 
 This has also been implemented using `Direct`, `Binned`, and `FFT` methods.
 
