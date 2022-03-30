@@ -2,7 +2,7 @@ name = "KDEstimation"
 uuid = "c13e3d18-d57b-11e9-0f19-037e2db2dfef"
 desc = "General framework for Kernel Density Estimation"
 authors = ["m-wells <maw461@psu.edu>"]
-version = "0.1.2"
+version = "0.1.3"
 
 [deps]
 AbstractFFTs = "621f4979-c628-5d54-868e-fcf4e3e8185c"
