@@ -2,7 +2,15 @@ const FFTPlansDict = Dict{
     Int64,
     Tuple{
         rFFTWPlan{Float64,-1,false,1},
-        ScaledPlan{Complex{Float64},rFFTWPlan{Complex{Float64},1,false,1,UnitRange{Int}},Float64}
+        ScaledPlan{
+            Complex{Float64},
+            rFFTWPlan{Complex{Float64},
+            1,
+            false,
+            1,
+            UnitRange{Int},
+        },
+        Float64}
     }
 }
 
@@ -17,9 +25,9 @@ function get_plans!(plans::FFTPlansDict, N::Int)
     return (FFT,IFFT)
 end
 
-@inline (kde::FFTUnivariateKDE)(x) = kde.interp(x)
+(kde::FFTUnivariateKDE)(x) = kde.interp(x)
 
-@inline function kde(Kh::Kernel{Scaled,D}, X::AbstractVector, EM::FFT) where {D<:Distribution}
+function kde(Kh::Kernel{Scaled,D}, X::AbstractVector, EM::FFT) where {D<:Distribution}
     M = EM.M
     grid = get_grid(Kh,X,M)
     δ = step(grid)
@@ -39,8 +47,7 @@ end
     end
 
     C = FFT*cpz
-    K = FFT*kpz
-    C.*=K
+    C .*= FFT*kpz
 
     s = IFFT*C
     d_estimate = s[(2L+1):(2L+M)]
@@ -49,7 +56,7 @@ end
 end
 
 
-@inline function lscv(Kh::Kernel{Scaled,D}, X::AbstractVector, EM::FFT) where {D<:Distribution}
+function lscv(Kh::Kernel{Scaled,D}, X::AbstractVector, EM::FFT) where {D<:Distribution}
     M = EM.M
     grid = get_grid(Kh,X,M)
     δ = step(grid)
@@ -72,8 +79,6 @@ end
 
     C = FFT*cpz
     C .*= FFT*kpz
-    #K = FFT*kpz
-    #C.*=K
 
     s = IFFT*C
     dgrid = s[(2L+1):(2L+M)]
@@ -82,4 +87,6 @@ end
     return ψ + 2Kh(0)/n
 end
 
-@inline lscv(::Type{D}, h::Real, X::AbstractVector, EM::FFT) where {D<:Distribution} = lscv(Kernel(D,h), X, EM)
+function lscv(::Type{D}, h::Real, X::AbstractVector, EM::FFT) where {D<:Distribution}
+    return lscv(Kernel(D,h), X, EM)
+end

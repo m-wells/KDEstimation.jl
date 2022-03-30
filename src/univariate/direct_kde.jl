@@ -1,26 +1,26 @@
-@inline function kde(Kh::Kernel{Scaled,D}, X::AbstractVector, ::Direct) where {D<:Distribution}
-    return DirectUnivariateKDE(Kh,X)
+function kde(Kh::Kernel{Scaled,D}, x::AbstractVector, ::Direct) where {D<:Distribution}
+    return DirectUnivariateKDE(Kh,x)
 end
 
 function (kde::DirectUnivariateKDE)(x::Real)
-    n = length(kde.X)
-    f(t) = kde.Kh(x - t)
-    return sum(f, kde.X)/n
+    n = length(kde.x)
+    f(xᵢ) = kde.Kh(x - xᵢ)
+    return sum(xᵢ -> kde.Kh(x - xᵢ), kde.x)/n
 end
 
-function (kde::DirectUnivariateKDE)(X::AbstractVector)
-    retval = Vector{Float64}(undef,length(X))
-    for (i,x) in enumerate(X)
+function (kde::DirectUnivariateKDE)(xs::AbstractVector)
+    retval = Vector{Float64}(undef,length(xs))
+    for (i,x) in enumerate(xs)
         retval[i] = kde(x)
     end
     return retval
 end
 
-function lscv(Kh::Kernel{Scaled,D}, X::AbstractVector, ::Direct) where {D<:Distribution}
-    n = length(X)
+function lscv(Kh::Kernel{Scaled,D}, xs::AbstractVector, ::Direct) where {D<:Distribution}
+    n = length(xs)
     retval = 0.0
-    for xi in X
-        for xj in X
+    for xi in xs
+        for xj in xs
             u = (xi - xj)
             retval += T_H(Kh,u)
         end

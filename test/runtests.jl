@@ -1,9 +1,8 @@
 using KDEstimation
 using Test
 
-using Random: seed!
+using StableRNGs
 using Distributions
-
 
 @testset "canonical bandwidth" begin
     include("./testsets/cannon_bandwidths.jl")

@@ -3,7 +3,7 @@ using RecipesBase
 @recipe function f(kde::DirectUnivariateKDE)
     h = bandwidth(kde.Kh)
     @series begin
-        x1,x2 = extrema(kde.X)
+        x1,x2 = extrema(kde.x)
         pad = 1.1*h
         x1 -= pad
         x2 += pad
@@ -15,7 +15,7 @@ using RecipesBase
     @series begin
         seriestype --> :scatter
         markershape --> :vline
-        kde.X, zeros(length(kde.X))
+        kde.x, zeros(length(kde.x))
     end
 end
 
